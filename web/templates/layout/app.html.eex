@@ -18,8 +18,8 @@
     </div>
 
     <div id="aside">
-      BUTTON !
-      BUTTON !
+      <div id="add_user"><a href="#" title="Add User"><i class="fa fa-user-plus fa-5x"></i></a></div>
+        <div id="home"><a href="/" alt="Home" title="Home"><i class="fa fa-home fa-5x"></i></a></div>
     </div>
 
     <div id="container">
@@ -27,6 +27,7 @@
         <%= @inner %>
       </div>
     </div>
+
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
