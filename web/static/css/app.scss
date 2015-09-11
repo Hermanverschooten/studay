@@ -90,7 +90,7 @@ body {
 @mixin shared_sidebar {
     @include display(flex);
     @include flex-direction(row);
-    @include flex-wrap(wrap);
+    @include flex-wrap(nowrap);
     @include justify-content(center);
     @include align-items(center);
     @include flex-grow(1);
@@ -111,16 +111,25 @@ body {
 
     margin-bottom: 1em;
     @include media($tablet) {
+        width:30%
     }
 }
 
 #home {
     @include shared_sidebar ;
+    margin-bottom: 1em;
     @include media($tablet) {
-        margin-right: 0em;
+        width:30%
     }
 }
 
+#scores {
+    @include shared_sidebar ;
+    @include media($tablet) {
+        margin-right: 0em;
+        width: 30%;
+    }
+}
 #letter-index {
     @include flex-direction(row);
     @include display(flex);
