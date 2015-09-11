@@ -1,0 +1,13 @@
+<div id="letter-index">
+<%= for l <- ~w(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do %><a href="#<%= l %>"><%= l %></a><% end %>
+</div>
+<% current_letter="0" %>
+<%= for student <- @students do %>
+  <% if current_letter != first_letter(student) do %>
+    <%=  current_letter = first_letter(student) %>
+    <a name="#<%= current_letter %>"><%= current_letter %></a>
+  <% end %>
+  <div class="student-index">
+    <%= link name(student), to: student_path(@conn, :show, student) %>
+  </div>
+<% end %>

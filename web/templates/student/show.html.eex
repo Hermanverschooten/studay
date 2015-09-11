@@ -1,0 +1,28 @@
+<h2>Show student</h2>
+
+<ul>
+
+  <li>
+    <strong>Firstname:</strong>
+    <%= @student.firstname %>
+  </li>
+
+  <li>
+    <strong>Lastname:</strong>
+    <%= @student.lastname %>
+  </li>
+
+  <li>
+    <strong>Telephone:</strong>
+    <%= @student.telephone %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @student.email %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: student_path(@conn, :edit, @student) %>
+<%= link "Back", to: student_path(@conn, :index) %>
