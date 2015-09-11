@@ -184,3 +184,25 @@ body {
     }
 
 }
+
+#student_form {
+    div.form-group {
+        @include display(flex);
+        @include flex-direction(row);
+        label.control-label {
+            white-space: nowrap;
+            @include display(flex);
+            width: 30%;
+        }
+        input.form-control {
+            display: inline-block;
+            @include display(flex);
+            @include flex-grow(1);
+        }
+        .btn {
+            margin-top:1em;
+            display: inline-block;
+            @include flex-grow(1);
+        }
+    }
+}
