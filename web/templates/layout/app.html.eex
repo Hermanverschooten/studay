@@ -13,13 +13,14 @@
 
   <body>
     <%# <div id="alerts"> %>
-    <%#   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %1></p> %>
-    <%#   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %1></p> %>
-    <%# </div> %>
+      <%#   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %1></p> %>
+      <%#   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %1></p> %>
+      <%# </div> %>
 
     <div id="aside">
       <div id="add_user"><a href="/students/new" title="Add User"><i class="fa fa-user-plus fa-5x"></i></a></div>
-        <div id="home"><a href="/" alt="Home" title="Home"><i class="fa fa-home fa-5x"></i></a></div>
+      <div id="home"><a href="/" alt="Home" title="Home"><i class="fa fa-home fa-5x"></i></a></div>
+      <div id="scores"><a href="#" alt="Scores" title="Scores"><a class="fa fa-dashboard fa-5x"></i></a></div>
     </div>
 
     <div id="container">

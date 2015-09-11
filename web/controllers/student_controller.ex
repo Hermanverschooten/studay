@@ -6,8 +6,9 @@ defmodule Studay.StudentController do
   plug :scrub_params, "student" when action in [:create, :update]
 
   def index(conn, _params) do
-    students = Repo.all(Student)
-    render(conn, "index.html", students: students)
+    students = Student |> Student.sorted |> Repo.all
+    letters = Student.Queries.letters
+    render(conn, "index.html", students: students, letters: letters)
   end
 
   def new(conn, _params) do
@@ -47,7 +48,7 @@ defmodule Studay.StudentController do
       {:ok, student} ->
         conn
         |> put_flash(:info, "Student updated successfully.")
-        |> redirect(to: student_path(conn, :show, student))
+        |> redirect(to: student_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", student: student, changeset: changeset)
     end
