@@ -24,9 +24,7 @@
     </div>
 
     <div id="container">
-      <div id="main">
         <%= @inner %>
-      </div>
     </div>
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

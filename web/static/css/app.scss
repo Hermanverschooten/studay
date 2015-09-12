@@ -18,6 +18,8 @@ html, body {
 }
 
 body {
+    font-family: $helvetica;
+
     background-color: $background-color;
     color: $text-color;
     a {
@@ -43,28 +45,10 @@ body {
 
 #container {
     @include flex-grow(1);
-    height: 100%;
-    width: 100%;
     margin-right: 1em;
-    overflow: hidden;
     border-radius: 5px;
-    @include media($tablet) {
-        height: 68%;
-    }
-    @include media($mobile) {
-        height: 400px;
-    }
-}
-
-#main {
-    position: relative;
     padding: .5em;
-    height: 100%;
-    width: 100%;
     background-color: $aside-bg-color;
-    @include media($tablet) {
-        height: 100%;
-    }
 }
 
 #aside {
@@ -103,7 +87,6 @@ body {
     padding: 1em;
     border-radius: 5px;
     background-color: $aside-bg-color;
-    box-shadow: 1px 1px 1px 1px $aside-bg-color;
 }
 
 #add_user {
@@ -119,15 +102,20 @@ body {
     @include shared_sidebar ;
     margin-bottom: 1em;
     @include media($tablet) {
-        width:30%
+        width:30%;
+        margin-right: 0em;
     }
 }
 
 #scores {
     @include shared_sidebar ;
     @include media($tablet) {
+        // visibility: hidden;
         margin-right: 0em;
         width: 30%;
+    }
+    @include media($mobile) {
+        visibility: hidden;
     }
 }
 #letter-index {
@@ -186,23 +174,26 @@ body {
 }
 
 #student_form {
-    div.form-group {
-        @include display(flex);
-        @include flex-direction(row);
+    .form-group {
+        padding: .5em;
         label.control-label {
             white-space: nowrap;
-            @include display(flex);
-            width: 30%;
+            display: block;
+            text-transform: uppercase;
         }
         input.form-control {
-            display: inline-block;
-            @include display(flex);
-            @include flex-grow(1);
+            width: 100%;
+            font-size: 1.2em;
+            line-height: 2em;
+            border: none;
+            padding: 0.25em;
         }
         .btn {
             margin-top:1em;
-            display: inline-block;
-            @include flex-grow(1);
+            width: 100%;
         }
+    }
+    .gender-group {
+        padding: 1em;
     }
 }

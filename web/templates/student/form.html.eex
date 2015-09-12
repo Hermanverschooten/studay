@@ -12,32 +12,30 @@
 
   <div class="form-group">
     <%= label f, :firstname, "Voornaam", class: "control-label" %>
-    <%= text_input f, :firstname, class: "form-control", "data-dependency": "student_lastname" %>
+    <%= text_input f, :firstname, class: "form-control", required: true%>
   </div>
 
   <div class="form-group">
     <%= label f, :lastname, "Naam", class: "control-label" %>
-    <%= text_input f, :lastname, class: "form-control" %>
+    <%= text_input f, :lastname, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
     <%= label f, :telephone, "GSM", class: "control-label" %>
-    <%= text_input f, :telephone, class: "form-control" %>
+    <%= telephone_input f, :telephone, class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
     <%= label f, :email, "Email", class: "control-label" %>
-    <%= email_input f, :email, class: "form-control" %>
+    <%= email_input f, :email, class: "form-control", required: true %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :gender, "Geslacht", class: "control-label" %>
+  <div class="gender-group">
     <%= radio_button f, :gender, false  %><%= label f, "gender_false", "", class: "fa fa-male fa-2x"%>
     <%= radio_button f, :gender, true %><%= label f, "gender_true","", class: "fa fa-female fa-2x" %>
 </div>
 
 <div class="form-group">
-  <label class="control-label">&nbsp;</label>
-<%= submit "Submit", class: "btn btn-primary" %>
+  <%= submit "Submit", class: "btn btn-primary" %>
 </div>
 <% end %>
