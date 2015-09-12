@@ -1,0 +1,33 @@
+<h2>Show game</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @game.name %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @game.type %>
+  </li>
+
+  <li>
+    <strong>Logo:</strong>
+    <%= @game.logo %>
+  </li>
+
+  <li>
+    <strong>Active:</strong>
+    <%= @game.active %>
+  </li>
+
+  <li>
+    <strong>Max time:</strong>
+    <%= @game.max_time %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: game_path(@conn, :edit, @game) %>
+<%= link "Back", to: game_path(@conn, :index) %>

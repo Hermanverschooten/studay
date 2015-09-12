@@ -13,7 +13,6 @@ html {
 
 html, body {
     height: 100%;
-    @include outer-container;
 
 }
 
@@ -146,7 +145,7 @@ body {
 
 }
 
-#student_form {
+form {
     .form-group {
         padding: .5em;
         label.control-label {
@@ -168,5 +167,23 @@ body {
     }
     .gender-group {
         padding: 1em;
+    }
+}
+
+#game-list {
+    @include display(flex);
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+    width: 100%;
+    a {
+        width: 49%;
+        text-decoration:none;
+        text-align:center;
+        background-color: $background-color;
+        margin-right: 5px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        display: block;
     }
 }

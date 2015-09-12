@@ -16,7 +16,7 @@ defmodule Studay.Router do
   scope "/", Studay do
     pipe_through :browser # Use the default browser stack
 
-    get "/", StudentController, :index
+    get "/", GameController, :index
     resources "/students", StudentController
   end
 
