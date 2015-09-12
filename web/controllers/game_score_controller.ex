@@ -9,7 +9,7 @@ defmodule Studay.GameScoreController do
 
   def index(conn, %{"game_id" => game_id}) do
     game = Repo.get(Game, game_id)
-    students = Repo.all(Student)
+    students = Repo.all(query(game))
     render(conn, "index.html", students: students, game: game)
   end
 
@@ -18,6 +18,10 @@ defmodule Studay.GameScoreController do
     student = Repo.get(Student, student_id)
     changeset = Score.changeset(%Score{ game_id: game_id, student_id: student_id})
     render(conn, "new.html", changeset: changeset, student: student, game: game)
+  end
+
+  defp query(game) do
+    from s in Student, where: fragment("id not in (select student_id from scores where game_id = ?)", ^game.id)
   end
 
   def create(conn, %{"game_id" => game_id, "student_id" => student_id, "score" => score_params}) do
