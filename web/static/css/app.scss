@@ -19,7 +19,6 @@ html, body {
 
 body {
     font-family: $helvetica;
-
     background-color: $background-color;
     color: $text-color;
     a {
@@ -45,7 +44,6 @@ body {
 
 #container {
     @include flex-grow(1);
-    margin-right: 1em;
     border-radius: 5px;
     padding: .5em;
     background-color: $aside-bg-color;
@@ -54,70 +52,45 @@ body {
 #aside {
     @include display(flex);
     @include flex-direction(column);
-    @include align-content(stretch);
     background-color: transparant;
     width: 150px;
     height: 100%;
-    margin-right: 1em;
     @include media($tablet) {
         @include flex-direction(row);
-        @include flex-wrap(wrap);
+        // @include flex-wrap(wrap);
         width: 100%;
         height: 15%;
-        margin-bottom: 1em;
     }
-    @include media($mobile) {
-        height: 150px;
+    a {
+        flex: 1 1 auto;
+        // display: block;
+        text-align: center;
+        background-color: $aside-bg-color;
+        margin-right: 5px;
+        text-decoration: none;
+        border-radius: 5px;
+        @include display(flex);
+        @include align-content(center);
+        @include justify-content(center);
+        @include flex-direction(column);
+        i {
+            display: block;
+        }
+        @include media($tablet) {
+            margin: 0;
+            margin-bottom: 5px;
+        }
     }
-}
-
-@mixin shared_sidebar {
-    @include display(flex);
-    @include flex-direction(row);
-    @include flex-wrap(nowrap);
-    @include justify-content(center);
-    @include align-items(center);
-    @include flex-grow(1);
-    @include flex-basis(225px);
-    width: 130px;
-    overflow: auto;
-    position: relative;
-    height: 100%;
-    margin-right: 1em;
-    padding: 1em;
-    border-radius: 5px;
-    background-color: $aside-bg-color;
-}
-
-#add_user {
-    @include shared_sidebar ;
-
-    margin-bottom: 1em;
-    @include media($tablet) {
-        width:30%
+    .home {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        @include media($tablet) {
+            margin: 5px;
+            margin-top: 0;
+        }
     }
 }
 
-#home {
-    @include shared_sidebar ;
-    margin-bottom: 1em;
-    @include media($tablet) {
-        width:30%;
-        margin-right: 0em;
-    }
-}
-
-#scores {
-    @include shared_sidebar ;
-    @include media($tablet) {
-        // visibility: hidden;
-        margin-right: 0em;
-        width: 30%;
-    }
-    @include media($mobile) {
-        visibility: hidden;
-    }
-}
 #letter-index {
     @include flex-direction(row);
     @include display(flex);
