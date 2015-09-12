@@ -17,7 +17,14 @@ defmodule Studay.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", GameController, :index
+    resources "/games", GameController do
+      get "/scores", GameScoreController, :index
+      get "/scores/:student_id/new", GameScoreController, :new
+      get "/scores/:student_id", GameScoreController, :show
+      post "/scores/:student_id", GameScoreController, :create
+    end
     resources "/students", StudentController
+    resources "/scores", ScoreController
   end
 
   # Other scopes may use custom stacks.
