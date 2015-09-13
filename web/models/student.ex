@@ -24,6 +24,10 @@ defmodule Studay.Student do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> update_change(:email, &String.downcase/1)
+    |> update_change(:telephone, fn(x) -> String.replace(x,~r/ |\./,"") end)
+    |> validate_format(:email, ~r/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)
+    |> validate_format(:telephone, ~r/^(\+32|0)\d{9}$/)
   end
 
   def sorted(query) do
