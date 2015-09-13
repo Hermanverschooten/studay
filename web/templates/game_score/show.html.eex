@@ -1,0 +1,10 @@
+<div id="new_game_score">
+   <h1><%= @game.name %></h1>
+   <h2><%= @student.firstname%> <%= @student.lastname%></h2>
+
+   <%= render "game_#{@game.type}.html", score: @score%>
+
+   <%= link(to: game_score_path(@conn, :index, @game)) do %>
+      <i class="fa fa-check"></i>
+   <% end %>
+</div>

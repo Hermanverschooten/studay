@@ -1,0 +1,6 @@
+<div id="new_game_score">
+   <h1><%= @game.name %></h1>
+   <h2><%= @student.firstname%> <%= @student.lastname%></h2>
+
+   <%= render "edit_game_#{@game.type}.html", changeset: @changeset, conn: @conn, game: @game, student: @student %>
+</div>

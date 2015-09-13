@@ -1,0 +1,3 @@
+<div id="timer">
+  <span id="time"><%= @score.points%> Punten</span>
+</div>

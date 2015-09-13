@@ -1,0 +1,28 @@
+<h2>Show score</h2>
+
+<ul>
+
+  <li>
+    <strong>Game:</strong>
+    <%= @score.game_id %>
+  </li>
+
+  <li>
+    <strong>Student:</strong>
+    <%= @score.student_id %>
+  </li>
+
+  <li>
+    <strong>Points:</strong>
+    <%= @score.points %>
+  </li>
+
+  <li>
+    <strong>Data:</strong>
+    <%= @score.data %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: score_path(@conn, :edit, @score) %>
+<%= link "Back", to: score_path(@conn, :index) %>
