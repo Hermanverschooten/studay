@@ -2,6 +2,8 @@ defmodule Studay.Student do
   use Studay.Web, :model
   import Ecto.Query
 
+  alias Studay.Score
+
   schema "students" do
     field :firstname, :string
     field :lastname, :string
@@ -10,6 +12,8 @@ defmodule Studay.Student do
     field :gender, :boolean
 
     timestamps
+
+    has_many :scores, Studay.Score
   end
 
   @required_fields ~w(firstname lastname telephone email gender)
@@ -33,6 +37,13 @@ defmodule Studay.Student do
   def sorted(query) do
     from p in query,
     order_by: [p.lastname]
+  end
+
+  def count_scores(query) do
+    from p in query,
+    group_by: p.id,
+    left_join: c in assoc(p, :scores),
+    select: {p, count(c.id)}
   end
 
   defmodule Queries do

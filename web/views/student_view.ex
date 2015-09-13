@@ -18,6 +18,6 @@ defmodule Studay.StudentView do
   end
 
   def games_completed(student) do
-    "1/8"
+    1
   end
 end

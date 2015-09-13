@@ -20,7 +20,7 @@
     <div id="aside">
       <a href="/students/new" title="Add User"> <i class="fa fa-user-plus fa-5x"></i> </a>
       <a href="/" alt="Home" title="Home" class="home"><i class="fa fa-home fa-5x"></i></a>
-      <a href="#" alt="Scores" title="Scores"><i class="fa fa-dashboard fa-5x"></i></a>
+      <a href="/students" alt="Scores" title="Scores"><i class="fa fa-dashboard fa-5x"></i></a>
     </div>
 
     <div id="container">

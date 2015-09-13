@@ -1,5 +1,9 @@
 defmodule Studay.Game do
   use Studay.Web, :model
+  import Ecto.Query
+
+  alias Studay.Game
+  alias Studay.Repo
 
   schema "games" do
     field :name, :string
@@ -36,5 +40,9 @@ defmodule Studay.Game do
   def sorted(query) do
     from p in query,
     order_by: [p.name]
+  end
+
+  def count do
+    List.first Game |> Game.active |> select([g], count(g.id)) |> Repo.all
   end
 end
