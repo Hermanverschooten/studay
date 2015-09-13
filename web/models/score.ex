@@ -10,7 +10,7 @@ defmodule Studay.Score do
     timestamps
   end
 
-  @required_fields ~w(points)
+  @required_fields ~w(points game_id student_id)
   @optional_fields ~w(data)
 
   @doc """
@@ -22,5 +22,6 @@ defmodule Studay.Score do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:game_id, name: :scores_game_student)
   end
 end
