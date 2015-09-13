@@ -1,1 +1,141 @@
-GAME 3
+<div id="timer">
+  <button onclick="start();">
+    <i class="fa fa-play"></i>
+  </button>
+  <span id="time"></span>
+  <button onclick="stop();">
+    <i class="fa fa-stop"></i>
+  </button>
+</div>
+
+<%= form_for @changeset, game_score_path(@conn, :create, @game, @student), fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below:</p>
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= hidden_input f, :points %>
+<div class="form-group">
+  <%= label f, :count, "Aantal goed", class: "control-label" %>
+  <%= number_input f, :count, class: "form-control", oninput: "calc_points(this.value);"%>
+</div>
+
+<div class="form-group">
+  <%= label f, :display_points, "Score", class: "control-label" %>
+  <%= number_input f, :display_points, class: "form-control", disabled: true %>
+</div>
+
+<div class="form-group">
+  <%= submit "Submit", class: "btn btn-primary"%>
+</div>
+<% end %>
+
+
+<script >
+
+  var clsStopwatch = function() {
+  // Private vars
+  var startAt = 0;    // Time of last start / resume. (0 if not running)
+  var lapTime = 0;    // Time on the clock when last stopped in milliseconds
+  var runtime = <%= @game.max_time * 1000 %>;
+
+  var now = function() {
+  return (new Date()).getTime();
+  };
+
+  // Public methods
+  // Start or resume
+  this.start = function() {
+  startAt = startAt ? startAt : now();
+  };
+
+  // Stop or pause
+  this.stop = function() {
+  // If running, update elapsed time otherwise keep it
+  lapTime = startAt ? lapTime + now() - startAt : lapTime;
+  startAt = 0; // Paused
+  };
+
+  // Reset
+  this.reset = function() {
+  lapTime = startAt = 0;
+  };
+
+  // Duration
+  this.time = function() {
+  return runtime - (lapTime + (startAt ? now() - startAt : 0));
+  };
+  };
+
+  var x = new clsStopwatch();
+  var $time;
+  var clocktimer;
+
+  function pad(num, size) {
+  var s = "0000" + num;
+  return s.substr(s.length - size);
+  }
+
+  function formatTime(time) {
+  var h = m = s = ms = 0;
+  var newTime = '';
+
+  h = Math.floor( time / (60 * 60 * 1000) );
+  time = time % (60 * 60 * 1000);
+  m = Math.floor( time / (60 * 1000) );
+  time = time % (60 * 1000);
+  s = Math.floor( time / 1000 );
+  ms = time % 1000;
+
+  newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
+  return newTime;
+  }
+
+  function show() {
+  $time = document.getElementById('time');
+  update();
+  }
+
+  function update() {
+  if(x.time() <= 0) {
+    stop();
+    $time.innerHTML = formatTime(0);
+    alert("Time is up!!!");
+    } else {
+      $time.innerHTML = formatTime(x.time());
+    }
+  }
+
+  function start() {
+  clocktimer = setInterval("update()", 1);
+  x.start();
+  }
+
+  function stop() {
+  x.stop();
+  clearInterval(clocktimer);
+  }
+
+  function reset() {
+  stop();
+  x.reset();
+  update();
+  }
+
+
+  $points = document.getElementById('score_points');
+  $display_points = document.getElementById('score_display_points');
+
+  function calc_points(ct) {
+    $points.value = ct * <%= @game.bonus %>;
+    $display_points.value = ct * <%= @game.bonus %>;
+  }
+
+  show();
+  calc_points(0);
+</script>

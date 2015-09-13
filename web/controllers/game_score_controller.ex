@@ -35,7 +35,7 @@ defmodule Studay.GameScoreController do
       {:ok, _score} ->
         conn
         |> put_flash(:info, "Score created successfully.")
-        |> redirect(to: game_game_score_path(conn, :show, game, student))
+        |> redirect(to: game_score_path(conn, :show, game, student))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, student: student, game: game)
     end

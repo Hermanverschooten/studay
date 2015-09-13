@@ -18,10 +18,10 @@ defmodule Studay.Router do
 
     get "/", GameController, :index
     resources "/games", GameController do
-      get "/scores", GameScoreController, :index
-      get "/scores/:student_id/new", GameScoreController, :new
-      get "/scores/:student_id", GameScoreController, :show
-      post "/scores/:student_id", GameScoreController, :create
+      get "/scores", GameScoreController, :index, as: :score
+      get "/scores/:student_id/new", GameScoreController, :new, as: :score
+      get "/scores/:student_id", GameScoreController, :show, as: :score
+      post "/scores/:student_id", GameScoreController, :create, as: :score
     end
     resources "/students", StudentController
     resources "/scores", ScoreController
