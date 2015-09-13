@@ -21,7 +21,9 @@ defmodule Studay.GameScoreController do
   end
 
   defp query(game) do
-    from s in Student, where: fragment("id not in (select student_id from scores where game_id = ?)", ^game.id)
+    from s in Student,
+      where: fragment("id not in (select student_id from scores where game_id = ?)", ^game.id),
+      order_by: :lastname
   end
 
   def create(conn, %{"game_id" => game_id, "student_id" => student_id, "score" => score_params}) do
