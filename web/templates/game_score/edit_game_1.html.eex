@@ -8,6 +8,22 @@
   </button>
 </div>
 
+<%= form_for @changeset, game_game_score_path(@conn, :create, @game, @student), fn f -> %>
+<%= if @changeset.action do %>
+  <div class="alert alert-danger">
+    <p>Oops, something went wrong! Please check the errors below:</p>
+    <ul>
+      <%= for {attr, message} <- f.errors do %>
+        <li><%= humanize(attr) %> <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= hidden_input f, :points %>
+<div class="form-group">
+  <%= submit "Submit", class: "btn btn-primary", enabled: false %>
+</div>
+<% end %>
 
 
 <script >
