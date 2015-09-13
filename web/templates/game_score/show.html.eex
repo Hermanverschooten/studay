@@ -4,7 +4,7 @@
 
    <%= render "game_#{@game.type}.html", score: @score%>
 
-   <%= link(to: game_game_score_path(@conn, :index, @game)) do %>
+   <%= link(to: game_score_path(@conn, :index, @game)) do %>
       <i class="fa fa-check"></i>
    <% end %>
 </div>

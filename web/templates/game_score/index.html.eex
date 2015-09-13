@@ -4,7 +4,7 @@
   <%= for student <- @students do %>
     <li class="fa fa-<%= gender(student) %> fa-2x">
     <span class="student_name">
-      <%= link name(student), to: game_game_score_path(@conn, :new, @game, student), name: "#" <> first_letter(student) %>
+      <%= link name(student), to: game_score_path(@conn, :new, @game, student), name: "#" <> first_letter(student) %>
     </span>
     </li>
   <% end %>
