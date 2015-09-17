@@ -14,7 +14,7 @@ defmodule Studay.StudentController do
   end
 
     def new(conn, _params) do
-    changeset = Student.changeset(%Student{gender: true})
+    changeset = Student.changeset(%Student{gender: false})
     render(conn, "new.html", changeset: changeset)
   end
 
