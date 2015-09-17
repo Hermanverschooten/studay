@@ -169,32 +169,24 @@ form {
         }
     }
     .gender-group {
-        padding: 1em;
-            input[type=radio] {
-                border: 0;
-                clip: rect(0 0 0 0);
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-                width: 1px;
-            }
-            label {
-                font-size: 6em;
-                letter-spacing: 1em;
-            }
-
-            input[type=radio]:checked {
-                font-size: 2em;
-                color: $background-color;
-                letter-spacing: 5px;
-            }
-            input[type=radio]:focus + label:before,
-            input[type=radio]:focus + label,
-            {
+        margin: 1em;
+        margin-bottom: -0.5em;
+        input {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            &:active + .fa {
                 color: $background-color;
             }
+            &:checked + .fa {
+                color: $background-color;
+            }
+        }
+        label {
+            display: inline-block;
+            font-size: 6em;
+            letter-spacing: 1em;
+        }
     }
 }
 
