@@ -21,7 +21,7 @@
 <% end %>
 <%= hidden_input f, :points %>
 <div class="form-group">
-  <%= submit "Submit", class: "btn btn-primary", enabled: false %>
+  <%= submit "Submit", class: "btn btn-primary", id: :submit, disabled: true %>
 </div>
 <% end %>
 
@@ -59,6 +59,10 @@
   this.time = function() {
   return lapTime + (startAt ? now() - startAt : 0);
   };
+
+  this.running = function() {
+  return startAt != 0;
+  }
   };
 
   var x = new clsStopwatch();
@@ -100,10 +104,13 @@
   }
 
   function stop() {
+  if(x.running()) {
   x.stop();
   clearInterval(clocktimer);
   score = document.getElementById('score_points');
   score.value = x.time();
+  document.getElementById('submit').disabled = false;
+  }
   }
 
   function reset() {

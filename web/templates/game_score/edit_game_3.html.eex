@@ -8,7 +8,7 @@
   </button>
 </div>
 
-<%= form_for @changeset, game_score_path(@conn, :create, @game, @student), fn f -> %>
+<%= form_for @changeset, game_score_path(@conn, :create, @game, @student),[onsubmit: "return validate();"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below:</p>
@@ -22,7 +22,7 @@
 <%= hidden_input f, :points %>
 <div class="form-group">
   <%= label f, :count, "Aantal goed", class: "control-label" %>
-  <%= number_input f, :count, class: "form-control", oninput: "calc_points(this.value);"%>
+  <%= number_input f, :count, class: "form-control", oninput: "calc_points(this.value);", disabled: true%>
 </div>
 
 <div class="form-group">
@@ -31,12 +31,19 @@
 </div>
 
 <div class="form-group">
-  <%= submit "Submit", class: "btn btn-primary"%>
+  <%= submit "Submit", class: "btn btn-primary", id: :submit, disabled: true%>
 </div>
 <% end %>
 
 
 <script >
+
+  function validate()
+  {
+    var points = document.getElementById('score_count');
+    points.focus();
+    return points.value != "";
+  }
 
   var clsStopwatch = function() {
   // Private vars
@@ -70,7 +77,11 @@
   this.time = function() {
   return runtime - (lapTime + (startAt ? now() - startAt : 0));
   };
+  this.running = function() {
+  return startAt != 0;
+  }
   };
+
 
   var x = new clsStopwatch();
   var $time;
@@ -117,8 +128,13 @@
   }
 
   function stop() {
+  if(x.running()) {
   x.stop();
   clearInterval(clocktimer);
+  document.getElementById('submit').disabled=false;
+  document.getElementById('score_count').disabled=false;
+  document.getElementById('score_count').focus();
+  }
   }
 
   function reset() {

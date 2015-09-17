@@ -1,4 +1,4 @@
-<%= form_for @changeset, game_score_path(@conn, :create, @game, @student), fn f -> %>
+<%= form_for @changeset, game_score_path(@conn, :create, @game, @student),[onsubmit: "return validate();"], fn f -> %>
 <%= if @changeset.action do %>
   <div class="alert alert-danger">
     <p>Oops, something went wrong! Please check the errors below:</p>
@@ -19,3 +19,12 @@
 </div>
 <% end %>
 
+<script>
+  function validate()
+  {
+    var score = document.getElementById('score_points');
+    return score.value != "";
+  }
+
+
+</script>
