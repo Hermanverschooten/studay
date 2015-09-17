@@ -51,14 +51,10 @@ body {
 #aside {
     @include display(flex);
     @include flex-direction(column);
+    flex: 0 0 150px;
     background-color: transparant;
-    width: 150px;
-    height: 100%;
     @include media($tablet) {
         @include flex-direction(row);
-        // @include flex-wrap(wrap);
-        width: 100%;
-        height: 15%;
     }
     a {
         flex: 1 1 auto;
@@ -173,9 +169,7 @@ form {
         margin: 1em;
         margin-bottom: -0.5em;
         input {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            appearance: none;
+            @include appearance(none);
             &:active + .fa {
                 color: $background-color;
             }
@@ -197,7 +191,7 @@ form {
     @include flex-wrap(wrap);
     height: 90vh;
     @include media($tablet) {
-        height: 80vh;
+        height: 77vh;
     }
     margin-right: -5px;
     margin-bottom: -5px;
@@ -220,6 +214,7 @@ form {
         @include justify-content(center);
         @include flex-direction(column);
         text-decoration:none;
+        font-size: 2em;
     }
 }
 
