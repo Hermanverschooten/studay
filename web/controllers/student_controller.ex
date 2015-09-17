@@ -14,7 +14,7 @@ defmodule Studay.StudentController do
   end
 
     def new(conn, _params) do
-    changeset = Student.changeset(%Student{})
+    changeset = Student.changeset(%Student{gender: true})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -49,7 +49,7 @@ defmodule Studay.StudentController do
     case Repo.update(changeset) do
       {:ok, student} ->
         conn
-        |> put_flash(:info, "Student updated successfully.")
+        |> put_flash(:info, "#{student.lastname} updated successfully.")
         |> redirect(to: student_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", student: student, changeset: changeset)
