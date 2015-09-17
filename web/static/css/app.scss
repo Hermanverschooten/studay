@@ -199,6 +199,9 @@ form {
     @include media($tablet) {
         height: 80vh;
     }
+    margin-right: -5px;
+    margin-bottom: -5px;
+
     a {
         @include display(flex);
         width: calc(33% - 5px);
