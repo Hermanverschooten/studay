@@ -1,14 +1,17 @@
-<div id="letter-index">
-  <%= for l <- @letters do %><a href="#<%= l %>"><%= l %></a><% end %>
-</div>
-
 <ul id="student-index">
-  <%= for { student, count } <- @students do %>
+  <%= for { student, _position } <- @boys do %>
     <li class="fa fa-<%= gender(student) %> fa-2x">
     <span class="student_name">
-      <%= link name(student), to: student_path(@conn, :show, student), name: "#" <> first_letter(student) %>
+      <%= link name(student), to: student_path(@conn, :show, student)%>
     </span>
-    <span class="games_completed"><%= count %>/<%= @game_count %></span>
+    </li>
+  <% end %>
+  <br>
+  <%= for { student, _position } <- @girls do %>
+    <li class="fa fa-<%= gender(student) %> fa-2x">
+    <span class="student_name">
+      <%= link name(student), to: student_path(@conn, :show, student)%>
+    </span>
     </li>
   <% end %>
 </ul>

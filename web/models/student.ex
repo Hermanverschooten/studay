@@ -14,6 +14,7 @@ defmodule Studay.Student do
     timestamps
 
     has_many :scores, Studay.Score
+    has_one :position, Studay.Position, foreign_key: :id
   end
 
   @required_fields ~w(firstname lastname telephone email gender)
@@ -39,21 +40,17 @@ defmodule Studay.Student do
     order_by: [p.lastname]
   end
 
-  def count_scores(query) do
+  def count_scores(query, max_games) do
     from p in query,
     group_by: p.id,
     left_join: c in assoc(p, :scores),
+    having: count(c.id) == ^max_games,
     select: {p, count(c.id)}
   end
 
-  defmodule Queries do
-    def letters do
-      {:ok, result} =Ecto.Adapters.SQL.query(
-        Studay.Repo,
-        "select distinct UPPER(LEFT(lastname,1)) as l from students order by l",
-        []
-      )
-      Enum.flat_map(result[:rows], fn(x) -> x end)
-    end
+  def with_position(query) do
+    from p in query,
+    left_join: c in assoc(p, :position),
+    select: {p, c.position}
   end
 end

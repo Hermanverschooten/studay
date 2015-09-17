@@ -7,10 +7,16 @@ defmodule Studay.StudentController do
   plug :scrub_params, "student" when action in [:create, :update]
 
   def index(conn, _params) do
-    students = Student |> Student.sorted |> Student.count_scores |> Repo.all
-    letters = Student.Queries.letters
-    games_count = Game.count
-    render(conn, "index.html", students: students, letters: letters, game_count: games_count)
+    students = Student
+                |> Student.with_position
+                |> Repo.all
+    boys = students
+                |> Enum.filter(fn({student, _pos}) -> !student.gender end)
+                |> Enum.take(3)
+    girls = students
+                |> Enum.filter(fn({student, _pos}) -> student.gender end)
+                |> Enum.take(3)
+    render(conn, "index.html", boys: boys, girls: girls)
   end
 
     def new(conn, _params) do
