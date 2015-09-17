@@ -39,12 +39,13 @@ body {
     @include media($mobile) {
         @include flex-wrap(wrap);
     }
-} 
+}
 #container {
     @include flex-grow(1);
     border-radius: 5px;
     padding: .5em;
     background-color: $aside-bg-color;
+    overflow-y: auto;
 }
 
 #aside {
