@@ -11,10 +11,10 @@ defmodule Studay.StudentController do
                 |> Student.with_position
                 |> Repo.all
     boys = students
-                |> Enum.filter(fn({student, _pos}) -> !student.gender end)
+                |> Enum.filter(fn({student, pos}) -> !student.gender && pos end)
                 |> Enum.take(3)
     girls = students
-                |> Enum.filter(fn({student, _pos}) -> student.gender end)
+                |> Enum.filter(fn({student, pos}) -> student.gender && pos end)
                 |> Enum.take(3)
     render(conn, "index.html", boys: boys, girls: girls)
   end

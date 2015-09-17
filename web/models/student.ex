@@ -50,7 +50,7 @@ defmodule Studay.Student do
 
   def with_position(query) do
     from p in query,
-    left_join: c in assoc(p, :position),
+    join: c in assoc(p, :position),
     select: {p, c.position}
   end
 end
