@@ -39,8 +39,7 @@ body {
     @include media($mobile) {
         @include flex-wrap(wrap);
     }
-}
-
+} 
 #container {
     @include flex-grow(1);
     border-radius: 5px;
@@ -119,6 +118,7 @@ body {
     margin: 1em;
     width: 100%;
     li {
+        min-height: 44px;
         @include display(flex);
         @include flex-direction(row);
         margin: 0.1em;
@@ -163,10 +163,38 @@ form {
         .btn {
             margin-top:1em;
             width: 100%;
+            color: $text-color;
+            background-color: $background-color;
+            font-size: 2em;
         }
     }
     .gender-group {
         padding: 1em;
+            input[type=radio] {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+            label {
+                font-size: 6em;
+                letter-spacing: 1em;
+            }
+
+            input[type=radio]:checked {
+                font-size: 2em;
+                color: $background-color;
+                letter-spacing: 5px;
+            }
+            input[type=radio]:focus + label:before,
+            input[type=radio]:focus + label,
+            {
+                color: $background-color;
+            }
     }
 }
 
@@ -197,7 +225,7 @@ form {
     }
 }
 #timer {
-        font-size: 2em;
+    font-size: 2em;
     #time {
         font-size: 2em;
     }
