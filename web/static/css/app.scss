@@ -267,3 +267,24 @@ form {
         color: $background-color;
     }
 }
+#score_list_title {
+    h2 {
+        display: inline;
+    }
+}
+#score_list {
+    li {
+        width: 100%;
+        list-style: none;
+        font-size: 2.5em;
+    }
+    #score_list_name {
+        display:inline-block;
+        width:50%;
+    }
+    #score_list_score {
+        display:inline-block;
+        width:30%;
+        text-align:right;
+    }
+}

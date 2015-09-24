@@ -14,6 +14,7 @@ defmodule Studay.Student do
     timestamps
 
     has_many :scores, Studay.Score
+    has_many :games, through: [:scores, :game]
     has_one :position, Studay.Position, foreign_key: :id
   end
 

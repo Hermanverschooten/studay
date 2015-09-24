@@ -40,6 +40,7 @@ defmodule Studay.StudentController do
 
   def show(conn, %{"id" => id}) do
     student = Repo.get!(Student, id)
+              |> Repo.preload({:scores, :game})
     render(conn, "show.html", student: student)
   end
 
@@ -51,6 +52,7 @@ defmodule Studay.StudentController do
 
   def update(conn, %{"id" => id, "student" => student_params}) do
     student = Repo.get!(Student, id)
+
     changeset = Student.changeset(student, student_params)
 
     case Repo.update(changeset) do

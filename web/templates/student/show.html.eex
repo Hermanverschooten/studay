@@ -1,28 +1,25 @@
-<h2>Show student</h2>
+<span id="score_list_title">
+<h2><%= @student.firstname <> " " <> @student.lastname %></h2>
+<%= link to: student_path(@conn, :edit, @student) do %><i class='fa fa-edit '></i><%end%>
+</span>
 
-<ul>
+<p>
+<strong>Telephone:</strong> <%= @student.telephone %><br>
 
+<strong>Email:</strong> <%= @student.email %>
+<br>
+</p>
+
+<h2>Spelen</h2>
+<ul id="score_list">
+<%= for score <- @student.scores do %>
   <li>
-    <strong>Firstname:</strong>
-    <%= @student.firstname %>
+  <span id="score_list_name">
+    <%= score.game.name %>
+  </span>
+  <span id="score_list_score">
+    <%= display_score(score) %>
+  </span>
   </li>
-
-  <li>
-    <strong>Lastname:</strong>
-    <%= @student.lastname %>
-  </li>
-
-  <li>
-    <strong>Telephone:</strong>
-    <%= @student.telephone %>
-  </li>
-
-  <li>
-    <strong>Email:</strong>
-    <%= @student.email %>
-  </li>
-
+<%end%>
 </ul>
-
-<%= link "Edit", to: student_path(@conn, :edit, @student) %>
-<%= link "Back", to: student_path(@conn, :index) %>
