@@ -142,6 +142,30 @@ body {
 
 }
 
+#toppers_list {
+    @include display(flex);
+    @include flex-direction(row);
+    width: 100%;
+    .toppers {
+        @include flex-grow(1);
+        @include flex-shrink(0);
+        background: $background-color;
+        text-align: center;
+        margin: 0.5em;
+        border-radius: 5px;
+        padding: 0.5em;
+        .fa {
+            margin-bottom: 0.2em;
+        }
+        a {
+            padding: 0.5em;
+            text-decoration: none;
+            display: block;
+            font-size: 1.2em;
+        }
+    }
+}
+
 form {
     .form-group {
         padding: .5em;

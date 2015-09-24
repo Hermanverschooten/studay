@@ -16,7 +16,8 @@ defmodule Studay.StudentController do
     girls = students
                 |> Enum.filter(fn({student, pos}) -> student.gender && pos end)
                 |> Enum.take(3)
-    render(conn, "index.html", boys: boys, girls: girls)
+    students = Student |> Student.sorted |> Repo.all
+    render(conn, "index.html", boys: boys, girls: girls, students: students)
   end
 
     def new(conn, _params) do
