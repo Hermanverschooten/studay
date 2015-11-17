@@ -31,9 +31,11 @@ defmodule Studay.Student do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> update_change(:email, &String.downcase/1)
+    |> update_change(:lastname, &String.downcase/1)
+    |> update_change(:firstname, &String.downcase/1)
     |> update_change(:telephone, fn(x) -> String.replace(x,~r/ |\./,"") end)
     |> validate_format(:email, ~r/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)
-    |> validate_format(:telephone, ~r/^(\+32|0)\d{9}$/)
+    |> validate_format(:telephone, ~r/^(\+32|+31|+33|+34|0)\d{9}$/)
   end
 
   def sorted(query) do
