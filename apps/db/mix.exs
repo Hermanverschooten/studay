@@ -21,7 +21,7 @@ defmodule Db.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [
-      applications: [:logger, :postgrex, :ecto],
+      applications: [:logger, :postgrex, :phoenix_ecto],
       mod: {Db, []}
    ]
   end
@@ -47,6 +47,7 @@ defmodule Db.Mixfile do
     [
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.0"},
+      {:phoenix_ecto, "~> 3.0"},
     ]
   end
 

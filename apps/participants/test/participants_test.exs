@@ -1,49 +1,36 @@
 defmodule ParticipantsTest do
-  use ExUnit.Case
-  doctest Participants
+  use Db.ModelCase
 
-  test "Add a participant" do
-    Participants.start_link
-    participant = Participants.add("Herman", "verschooten", :male, "herman@verschooten.net")
-    assert participant.firstname == "Herman"
+  test "Adding a participant" do
+
+    assert [] == Participants.list
+
+    Participants.add("Herman", "verschooten", :male, "+32475549993", "Herman@verschooten.net")
+
+    assert 1 == Enum.count(Participants.list)
   end
 
-  test "Get the list of participants" do
-    Participants.start_link
-    Participants.add("Herman", "verschooten", :male, "herman@verschooten.net")
-    Participants.add("Hans", "verschooten", :male, "hans@verschooten.com")
+  test "List winners by gender" do
+    herman = Participants.add("Herman", "verschooten", :male, "+32475549993", "Herman@verschooten.net")
+    Participants.add("Kristien", "Slegers", :female, "+32475549992", "Kristien@verschooten.net")
 
-    list = Participants.list
+    assert 6 == herman.games_to_play
 
-    assert Enum.count(list) == 2
-  end
+    herman
+    |> Participants.played_a_game(100)
+    |> Participants.played_a_game(101)
+    |> Participants.played_a_game(102)
+    |> Participants.played_a_game(103)
+    |> Participants.played_a_game(104)
+    |> Participants.played_a_game(105)
 
-  test "Get the list of participants sort" do
-    Participants.start_link
-    p1 = Participants.add("Herman", "verschooten", :male, "herman@verschooten.net")
-    p2 = Participants.add("Hans", "verschooten", :male, "hans@verschooten.com")
+    [boy] = boys = Participants.winners(:male)
 
-    list = Participants.sorted_list(fn(p) -> [p.lastname, p.firstname] end)
+    assert 1 == Enum.count(boys)
+    assert 0 == Enum.count(Participants.winners(:female))
 
-    assert [p2, p1] == list
-  end
-
-  test "Get a single participant by id" do
-    Participants.start_link
-    p1 = Participants.add("Herman", "verschooten", :male, "herman@verschooten.net")
-    assert p1 == Participants.get(p1.id)
-  end
-
-  test "Add a played game" do
-    Participants.start_link
-    p1 = Participants.add("Herman", "verschooten", :male, "herman@verschooten.net")
-
-    Participants.add_game(p1.id, %Games.PlayedGame{game: :bus, score: 100})
-    Participants.add_game(p1.id, %Games.PlayedGame{game: :stoepoverlast, score: 10})
-
-    part = Participants.get(p1.id)
-
-    assert part.score == 110
+    assert boy.firstname == "Herman"
+    assert boy.score == 615
 
   end
 end

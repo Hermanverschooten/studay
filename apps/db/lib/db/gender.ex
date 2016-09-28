@@ -4,6 +4,8 @@ defmodule Db.Gender do
 
   def cast(string) when is_binary(string) do
    case String.downcase(string) do
+     "true" -> {:ok, true}
+     "false" -> {:ok, false}
      "male" -> {:ok, true}
      "female" -> {:ok, false}
      _ -> :error

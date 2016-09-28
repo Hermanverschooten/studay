@@ -1,89 +1,45 @@
 defmodule Participants do
-  use GenServer
+  alias Db.Repo
+  import Ecto.Query, only: [from: 2]
 
-  @type gender :: :male | :female
-  defstruct id: UUID.uuid4(),
-  firstname: "",
-  lastname: "",
-  gender: :male,
-  email: "",
-  score: 0,
-  games_played: []
-
-  def start_link do
-    GenServer.start_link(__MODULE__, nil, name: :participants)
-  end
 
   def list do
-    GenServer.call(:participants, :list)
+    (
+    from p in Db.Participants,
+    order_by: [:lastname, :firstname]
+    ) |> Repo.all
   end
 
-  def sorted_list(sorter) do
-    list() |> Enum.sort_by(sorter)
+  def add(params_list) do
+    Db.Participants.add(params_list)
+    |> Repo.insert
   end
 
-  def add(firstname, lastname, gender, email) do
-    GenServer.call(
-      :participants,
-      {
-        :add,
-        %Participants{
-          id: UUID.uuid4(),
-          firstname: firstname,
-          lastname: lastname,
-          gender: gender,
-          email: email
-        }
-      }
-    )
+  def add(firstname, lastname, gender, telephone, email) do
+    add(%{
+      firstname: firstname,
+      lastname: lastname,
+      gender: gender,
+      telephone: telephone,
+      email: email
+    })
   end
 
-  def get(key) do
-    GenServer.call(:participants, {:get, key})
+  def new, do: Db.Participants.add(%{})
+
+  def winners(gender, limit \\ 3) do
+    (
+    from p in Db.Participants,
+    where: p.gender == ^gender,
+    where: p.score > 0,
+    where: p.games_to_play == 0,
+    limit: ^limit
+    ) |> Repo.all
   end
 
-  def add_game(key, %Games.PlayedGame{} = game) do
-    GenServer.call(:participants, {:add_game, key, game})
+  def played_a_game(%Db.Participants{} = participant, score) do
+    Db.Participants.add_game_played(participant, %{game_score: score})
+    |> Repo.update!
   end
 
-  def init(_opts) do
-    :ets.new(__MODULE__, [:set, :protected, :named_table])
-    {:ok, nil}
-  end
-
-  def handle_call(:list, _from, state) do
-    list = get_list([], :ets.first(__MODULE__))
-    {:reply,list ,state}
-  end
-
-  def handle_call({:add, %Participants{} = part}, _from, state) do
-    :ets.insert(__MODULE__, { part.id, part})
-    {:reply, part, state}
-  end
-
-  def handle_call({:get, key}, _from, state) do
-    case :ets.lookup(__MODULE__, key) do
-      [{^key, part}] -> {:reply, part, state}
-      [] -> :error
-    end
-  end
-
-  def handle_call({:add_game, key, game}, _from, state) do
-    case :ets.lookup(__MODULE__, key) do
-      [{^key, part}] ->
-        new_part = part
-                    |> Map.put(:score, part.score + game.score)
-                    |> Map.put(:games, part.games_played ++ [game])
-       :ets.insert(__MODULE__, {key, new_part})
-       {:reply, new_part, state}
-       [] -> :error
-    end
-
-  end
-
-  defp get_list(acc, :"$end_of_table"), do: acc
-  defp get_list(acc, key) do
-    [{_key, part }] = :ets.lookup(__MODULE__, key)
-    get_list(acc ++ [part], :ets.next(__MODULE__, key))
-  end
 end

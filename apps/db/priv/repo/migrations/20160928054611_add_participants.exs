@@ -9,7 +9,7 @@ defmodule Db.Repo.Migrations.AddParticipants do
       add :email, :string
       add :gender, :boolean
       add :score, :integer
-      add :games_played, :integer
+      add :games_to_play, :integer
 
       timestamps
     end
