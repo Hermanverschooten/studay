@@ -1,0 +1,21 @@
+{
+  "name": "studay_2016",
+  "version": "0.0.0",
+  "authors": [
+    "Herman verschooten <Herman@verschooten.net>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Hermanverschooten/studay_2016",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.2.4",
+    "neat": "~1.7.2",
+    "react": "~0.13.3"
+  }
+}

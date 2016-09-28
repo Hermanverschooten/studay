@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Opname score Studay 2015">
+    <meta name="author" content="Herman verschooten <Herman@verschooten.net>">
+
+    <title>Overlastig - Studay 2015</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <%# <div id="alerts"> %>
+      <%#   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %1></p> %>
+      <%#   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %1></p> %>
+      <%# </div> %>
+
+    <div id="aside">
+      <a href="/participant/new" title="Add User"> <i class="fa fa-user-plus fa-5x"></i> </a>
+      <a href="/" alt="Home" title="Home" class="home"><i class="fa fa-home fa-5x"></i></a>
+      <a href="/score_board" alt="Scores" title="Scores"><i class="fa fa-dashboard fa-5x"></i></a>
+    </div>
+
+    <div id="container">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

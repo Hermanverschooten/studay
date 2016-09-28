@@ -1,0 +1,9 @@
+<div id="game-list">
+  <%= for game <- @games do %>
+    <%= link to: game.url do %>
+      <div>
+        <%= game.name %>
+      </div>
+    <% end %>
+  <%end %>
+</div>
