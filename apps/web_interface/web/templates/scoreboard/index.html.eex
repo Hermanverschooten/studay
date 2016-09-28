@@ -1,0 +1,42 @@
+<h1>Scores</h1>
+<%= for {game, list} <- @board do %>
+<div id="score_list">
+  <div class="toppers">
+    <%= game %>
+  </div>
+    <%= if Enum.count(list) == 0 do %>
+      <div>Nog geen winnaar</div>
+    <% end %>
+    <%= for toy <- list do %>
+    <%  boy = %Db.Participants{
+        id: Enum.at(toy, 0),
+        firstname: Enum.at(toy,1),
+        lastname: Enum.at(toy,2),
+        telephone: Enum.at(toy,3),
+        score: Enum.at(toy,4)
+        }
+      %>
+
+      <div>
+        <%= name(boy)%>, <%= boy.telephone %> : <%= boy.score %>
+      </div>
+    <% end %>
+  </div><br/>
+<%end%>
+<h1>Algemene Ranking</h1>
+<%= for toy <- @all do %>
+<%  boy = %Db.Participants{
+  id: Enum.at(toy, 0),
+  firstname: Enum.at(toy,1),
+  lastname: Enum.at(toy,2),
+  telephone: Enum.at(toy,3),
+  score: Enum.at(toy,4),
+  games_to_play: 6-Enum.at(toy,5)
+}
+  %>
+
+  <div>
+    <%= name(boy)%>, <%= boy.telephone %> : <%= boy.score %>/<%= boy.games_to_play%>
+  </div>
+
+<% end %>

@@ -21,7 +21,8 @@ defmodule WebInterface.Router do
     get "/score_board", ScoreBoardController, :index
     get "/games/:game", GameController, :index
     get "/games/:game/:id", GameController, :play
-		post "/games/:game/:id", GameController, :create
+    post "/games/:game/:id", GameController, :create
+    get "/score", ScoreboardController, :index
   end
 
   # Other scopes may use custom stacks.
