@@ -31,8 +31,8 @@
   </div>
 
   <div class="gender-group">
-    <%= radio_button f, :gender, :male  %><%= label f, "gender_false", "", class: "fa fa-male fa-2x"%>
-    <%= radio_button f, :gender, :female %><%= label f, "gender_true","", class: "fa fa-female fa-2x" %>
+    <%= radio_button f, :gender, "true"  %><%= label f, "gender_true", "", class: "fa fa-male fa-2x"%>
+    <%= radio_button f, :gender, "false" %><%= label f, "gender_false","", class: "fa fa-female fa-2x" %>
 </div>
 
 <div class="form-group">

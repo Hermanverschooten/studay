@@ -1,0 +1,24 @@
+<script>
+  function count() {
+  $('#score_points').val($('.busq input:checked').length);
+
+    }
+
+</script>
+<div class="busq">
+  <input id="q1" type="checkbox" name="questions[]" class="busq-btn" value="1"/><label for="q1">Boekentassen hinderlijk stallen</label>
+  <input id="q2" type="checkbox" name="questions[]" class="busq-btn" value="2"/><label for="q2">Ballenbad in afval</label>
+  <input id="q3" type="checkbox" name="questions[]" class="busq-btn" value="3"/><label for="q3">Lawaaihinder - Gsm / Disco / Muziek</label>
+  <input id="q4" type="checkbox" name="questions[]" class="busq-btn" value="4"/><label for="q4">Niemand doorlaten - Hinderen</label>
+  <input id="q5" type="checkbox" name="questions[]" class="busq-btn" value="5"/><label for="q5">Over de banken lopen - staan</label>
+  <input id="q6" type="checkbox" name="questions[]" class="busq-btn" value="6"/><label for="q6">Handtastelijkheden</label>
+  <input id="q7" type="checkbox" name="questions[]" class="busq-btn" value="7"/><label for="q7">Roken</label>
+  <input id="q8" type="checkbox" name="questions[]" class="busq-btn" value="8"/><label for="q8">Tags - Graffiti</label>
+</div>
+<%= form_for @conn, game_path(@conn, :create, @game, @participant), [as: :score, onsubmit: "count();"], fn f -> %>
+<%= hidden_input f, :points %>
+<div class="form-group">
+  <%= submit "Submit", class: "btn btn-primary", id: :submit%>
+</div>
+<% end %>
+

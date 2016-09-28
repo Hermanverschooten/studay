@@ -19,6 +19,9 @@ defmodule WebInterface.Router do
     get "/", PageController, :index
     resources "/participant", ParticipantController
     get "/score_board", ScoreBoardController, :index
+    get "/games/:game", GameController, :index
+    get "/games/:game/:id", GameController, :play
+		post "/games/:game/:id", GameController, :create
   end
 
   # Other scopes may use custom stacks.

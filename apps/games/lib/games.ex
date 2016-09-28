@@ -9,7 +9,7 @@ defmodule Games do
         %Scoring{name: "bus",                 type: :score, max: 6},
         %Scoring{name: "stoepoverlast",       type: :speed, max: 900000},
         %Scoring{name: "nachtlawaai",         type: :score, max: 200},
-        %Scoring{name: "vuilzakken-voetbal",  type: :speed, max: 900000},
+        %Scoring{name: "vuilzak-voetbal",  type: :speed, max: 900000},
         %Scoring{name: "wildplassen",         type: :score, max: 1000},
         %Scoring{name: "bellekentrek",        type: :speed, max: 900000},
       ]

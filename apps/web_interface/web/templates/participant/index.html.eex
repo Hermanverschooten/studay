@@ -27,7 +27,7 @@
 
 <ul id="student-index">
   <%= for participant <- @participants do %>
-    <li class="fa fa-<%= participant.gender %> fa-2x">
+    <li class="fa fa-<%= gender(participant)%> fa-2x">
     <span class="student_name">
       <%= link name(participant), to: participant_path(@conn, :show, participant)%>
     </span>

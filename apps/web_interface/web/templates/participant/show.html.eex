@@ -1,0 +1,36 @@
+<span id="score_list_title">
+<h2><%= name(@participant)%></h2>
+<%= link to: participant_path(@conn, :edit, @participant) do %><i class='fa fa-edit '></i><%end%>
+</span>
+
+<p>
+<strong>Telephone:</strong> <%= @participant.telephone %><br>
+
+<strong>Email:</strong> <%= @participant.email %>
+<br>
+</p>
+
+<h2>Spelen</h2>
+<ul id="score_list">
+<%= for game <- @games_played do %>
+  <li>
+  <span id="score_list_name">
+    <%= game.game %>
+  </span>
+  <span id="score_list_score">
+    <%= display_score(game.score, game.game) %>
+  </span>
+  </li>
+<%end%>
+  <li>
+  <span id="score_list_name">
+    <%= if @participant.games_to_play > 0 do %>
+    <%= @participant.games_to_play %> spelen nog te gaan!
+    <% end %>
+  </span>
+  <span id="score_list_score">
+  Score:
+    <%= display_score(@participant.score, :perc) %>
+  </span>
+  </li>
+</ul>

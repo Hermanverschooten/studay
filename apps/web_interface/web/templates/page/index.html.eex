@@ -1,6 +1,6 @@
 <div id="game-list">
   <%= for game <- @games do %>
-    <%= link to: game.url do %>
+    <%= link to: game_path(@conn, :index, game.url) do %>
       <div>
         <%= game.name %>
       </div>

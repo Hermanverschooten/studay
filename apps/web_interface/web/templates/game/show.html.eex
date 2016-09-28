@@ -1,0 +1,12 @@
+<div id="new_game_score">
+   <h1><%= @game %></h1>
+   <h2><%= name(@participant) %></h2>
+   <div>
+   <h3>U behaalde een score van</h3>
+   <h4><%= @score %></h4>
+ </div>
+
+   <%= link(to: game_path(@conn, :index, @game)) do %>
+      <i class="fa fa-check"></i>
+   <% end %>
+</div>

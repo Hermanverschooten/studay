@@ -18,7 +18,7 @@ defmodule Participants.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :db]]
+    [applications: [:logger, :db, :games]]
   end
 
   # Dependencies can be Hex packages:

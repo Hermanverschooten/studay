@@ -10,11 +10,12 @@ defmodule Db.Participants do
     field :lastname, :string
     field :telephone, :string
     field :email, :string
-    field :gender, Db.Gender, default: :male
+    field :gender, :boolean, default: :male
     field :score, :integer
     field :games_to_play, :integer
     field :game_score, :integer, virtual: true
     timestamps
+    has_many :games_played, Db.GamesPlayed
   end
 
   def add(params \\ %{}) do
@@ -25,6 +26,14 @@ defmodule Db.Participants do
     |> unique_constraint(:email)
     |> put_change(:games_to_play, @games)
     |> put_change(:score, 0)
+  end
+
+  def update(participant,params \\ %{}) do
+    participant
+    |> cast(params, [:firstname, :lastname, :telephone, :email, :gender])
+    |> validate_required([:firstname, :lastname, :telephone, :email, :gender])
+    |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:email)
   end
 
 
