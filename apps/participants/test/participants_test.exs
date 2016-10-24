@@ -45,7 +45,7 @@ defmodule ParticipantsTest do
     {:ok, herman} = Participants.add("Herman", "verschooten", true, "+32475549993", "Herman@verschooten.net")
     Participants.add("Kristien", "Slegers", false, "+32475549992", "Kristien@verschooten.net")
 
-    assert 6 == herman.games_to_play
+    assert 5 == herman.games_to_play
 
     herman
     |> Participants.played_a_game("bus",100 ,nil)

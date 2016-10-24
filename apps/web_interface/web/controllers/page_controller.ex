@@ -8,7 +8,7 @@ defmodule WebInterface.PageController do
       %{name: "Vuilzak-voetbal", url: "vuilzak-voetbal"},
       %{name: "Nachtlawaai", url: "nachtlawaai"},
       %{name: "Wildplassen", url: "wildplassen"},
-      %{name: "Bellekentrek", url: "bellekentrek"}
+#      %{name: "Bellekentrek", url: "bellekentrek"}
     ]
   end
 end

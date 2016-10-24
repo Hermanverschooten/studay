@@ -3,7 +3,7 @@ defmodule Db.Participants do
   import Ecto.Changeset
   alias Db.Participants
 
-  @games 6
+  @games 5
 
   schema "participants" do
     field :firstname, :string
