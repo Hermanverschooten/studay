@@ -6,7 +6,7 @@ defmodule Games do
     import Supervisor.Spec
 
     games = [
-        %Scoring{name: "bus",                 type: :score, max: 6},
+        %Scoring{name: "bus",                 type: :score, max: 8},
         %Scoring{name: "stoepoverlast",       type: :speed, max: 900000},
         %Scoring{name: "nachtlawaai",         type: :score, max: 200},
         %Scoring{name: "vuilzak-voetbal",  type: :speed, max: 900000},
