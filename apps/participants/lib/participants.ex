@@ -65,7 +65,7 @@ defmodule Participants do
 
   def played_a_game(%Db.Participants{} = participant, game, score, data) do
     Repo.transaction(fn ->
-      game_score = Games.Scoring.calc_score(game, score)
+      game_score = Games.Scoring.calc_score(game, score, data)
       Db.GamesPlayed.add(%{participants_id: participant.id, game: game, score: score, data: data})
       |> Repo.insert!
       Db.Participants.add_game_played(participant, %{game_score: game_score})

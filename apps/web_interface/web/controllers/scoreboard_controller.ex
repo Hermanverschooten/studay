@@ -4,29 +4,9 @@ defmodule WebInterface.ScoreboardController do
   import Ecto.Query
 
   def index(conn, _params) do
-    board = %{
-      "bus" =>  get_leader("bus"),
-      "stoepoverlast" => get_leader("stoepoverlast"),
-      "vuilzak-voetbal" => get_leader("vuilzak-voetbal"),
-      "nachtlawaai" => get_leader("nachtlawaai"),
-      "wildplassen" => get_leader("wildplassen"),
-      "bellekentrek" => get_leader("bellekentrek"),
-    }
-
     all = get_ranking
     conn
-    |> render("index.html", board: board, all: all)
-  end
-
-  defp get_leader(game) do
-    (
-    from p in Db.Participants,
-    join: g in assoc(p, :games_played),
-    where: g.game == ^game,
-    order_by: [desc: g.score],
-    limit: 3,
-    select: [p.id, p.firstname, p.lastname, p.telephone, g.score]
-    ) |>Repo.all
+    |> render("index.html", all: all)
   end
 
   defp get_ranking do

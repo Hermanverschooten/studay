@@ -9,10 +9,19 @@ defmodule Games.Scoring do
     GenServer.start_link(__MODULE__, games, name: :score)
   end
 
-  def calc_score(game, score) do
-    GenServer.call(:score, {:calc_score, game, score})
+  def calc_score(game, score, data \\ %{})
+  def calc_score(game, score, %{time: time}) when is_binary(time) do
+    calc_score(game, score, %{time: String.to_integer(time)})
+  end
+  def calc_score(game, score, %{time: time}) do
+    score1 = GenServer.call(:score, {:calc_score, game, score})
+    score2 = GenServer.call(:score, {:calc_score, game <> "time", time})
+    div(score2 + score1, 2)
   end
 
+  def calc_score(game, score, %{}) do
+    GenServer.call(:score, {:calc_score, game, score})
+  end
   #Private Interface
   def init(games) do
     table = :ets.new(:games, [:set, :protected, :named_table])

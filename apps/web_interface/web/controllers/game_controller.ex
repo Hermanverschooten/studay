@@ -13,10 +13,11 @@ defmodule WebInterface.GameController do
     |> render("play.html",game: game, participant: participant)
   end
 
-  def create(conn, %{"game" => game, "id" => id, "score" => %{"points" => points}}) do
+  def create(conn, %{"game" => game, "id" => id, "score" => %{"points" => points, "time" => time}}) do
     participant = Participants.find(id)
-    Participants.played_a_game(participant, game, points)
+
+    Participants.played_a_game(participant, game, points, %{time: time})
     conn
-    |> render("show.html", game: game, participant: participant, score: points)
+    |> render("show.html", game: game, participant: participant, score: "#{time}/#{points}")
   end
 end
