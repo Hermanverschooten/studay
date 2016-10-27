@@ -3,7 +3,8 @@ defmodule WebInterface.PageController do
 
   def index(conn, _params) do
     render conn, "index.html", games: [
-      %{name: "Overlastig Race", url: "bus"},
+      %{name: "Overlastig Thema's", url: "bus"},
+      %{name: "Overlastig Race", url: "bustime"},
       # %{name: "Stoepoverlast", url: "stoepoverlast"},
       # %{name: "Vuilzak-voetbal", url: "vuilzak-voetbal"},
       # %{name: "Nachtlawaai", url: "nachtlawaai"},
